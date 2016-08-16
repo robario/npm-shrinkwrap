@@ -96,6 +96,10 @@ function analyzeDependency(name, gitLink, opts, cb) {
 function parseTag(value) {
     var uri = url.parse(value);
 
+    if (uri.protocol === 'file:') {
+        return null;
+    }
+
     if (isGitUrl(uri)) {
         return {
             tag: uri.hash ? uri.hash.substr(1) : null

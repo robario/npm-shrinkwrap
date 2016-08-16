@@ -113,6 +113,9 @@ function isCorrect(filePath, dep, opts, cb) {
         resolvedUri.protocol === 'git+https:'
     ) {
         isCorrectSHA(filePath, dep, cb);
+    } else if (resolvedUri.protocol === 'file:') {
+        dep.correct = true;
+        cb(null, dep);
     } else {
         cb(new Error('unsupported protocol ' +
             resolvedUri.protocol));
